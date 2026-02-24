@@ -19,15 +19,15 @@ poetry run python3 src/main.py
 To run tests, use
 
 ```bash
-poetry poetry run coverage run --branch -m pytest src
+poetry run coverage run --branch -m pytest src
 ```
 
 Create a coverage report either with
 
 ```bash
-poetry poetry run coverage report
+poetry run coverage report
 ```
 
 ```bash
-poetry poetry run coverage html
+poetry run coverage html
 ```
