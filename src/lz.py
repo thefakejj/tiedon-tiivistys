@@ -24,7 +24,7 @@ class Node:
 # one function that calls all necessary functions for encoding and saving
 def encode_lz(filetext: str, binary_path: str):
     lz_table = create_table(filetext)
-    print(lz_table)
+    #print(lz_table)
     lz_binary = lz_to_binary_string(lz_table)
     lz_binary_to_file(lz_binary, binary_path)
 

@@ -5,4 +5,6 @@ johndoe.txt
 Tästä esimerkistä vain "Example content" -osio on käytössä
 
 hamlet.txt
-[hamlet](https://storage.googleapis.com/kagglesdsdata/datasets/44/7112/AUTHORS/AUTHORS/SHAKESPEARE/shakespeare-hamlet-25.txt?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20260209%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260209T151034Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=a6ff581c9276fa7823cd273cd317cb0cff3eaa411961bb8af26507d0ffaad1c2de3cb815885a529927f11b2caa8d4ee56a8e7763b000c9cedc9bc5bcbeee2e7ba63eaad845fadd98480774fc4386bd6cf49d8898e83f4332f3880d049426ff5dbce57c4715aae20afac7d80bb035fdd7726586a7a37aa8d10763ff77ca82f7c44c6754473d3322cbfe9239f7994b38304428be4377f85de45ac322b30bd263857112a74e37f9037605eaad9c67622e81f25268d6f7a061e17a0d3bc4f6477896a9ecc060973352452da66239a3ade9ea99b65311b4dc9d4580ee1ba443dcac186304ac71f71670248b8e997ef83fd4154b958058579ed80c92f7b89aacfb4a9b)
+[hamlet](https://www.kaggle.com/datasets/mylesoneill/classic-literature-in-ascii?resource=download)
+
+[Kaggle](https://www.kaggle.com/datasets/mylesoneill/classic-literature-in-ascii?resource=download) with much of texts used in tests:
