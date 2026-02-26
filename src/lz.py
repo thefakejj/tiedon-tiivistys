@@ -3,17 +3,18 @@ class Node:
         self.index = index # current node's table index
         self.children = dict() # children[char] = node. creates trie where routes create substrings (routes to both leaf and non-leaf nodes)
 
-    def search(self, root, key: str):
-        x = root
+    def search(self, key: str):
+        x = self # start from trie root
         prev_index = 0
         for i in range(len(key)):
             if x.children.get(key[i]) == None:
-                return (None, prev_index)
+                return (None, prev_index) # if key doesnt exist, result[0] = None
             x = x.children[key[i]]
             prev_index = x.index
-        return (x.index, prev_index)
+        return (True, prev_index) # if key exists, result[0] = True
 
-    def insert(self, x, key: str, index: int):
+    def insert(self, key: str, index: int):
+        x = self # start from trie root
         for char in key:
             if x.children.get(char) == None:
                 new_node = Node(index)
@@ -21,10 +22,27 @@ class Node:
                 return
             x = x.children[char]
 
+    # helper function to traverse tries. doesnt help too much to be honest.
+    def traverse(self):
+        visited = set()
+        queue = [self]
+        output = []
+
+        while len(queue) > 0:
+            current = queue[0]
+            print(current)
+            print(current.children)
+            if current not in visited and not None:
+                output.append(current.index)
+                for child in current.children:
+                    queue.append(current.children[child])
+                visited.add(current)
+                queue.remove(current)
+        return output
+
 # one function that calls all necessary functions for encoding and saving
 def encode_lz(filetext: str, binary_path: str):
     lz_table = create_table(filetext)
-    #print(lz_table)
     lz_binary = lz_to_binary_string(lz_table)
     lz_binary_to_file(lz_binary, binary_path)
 
@@ -46,12 +64,12 @@ def create_table(text: str):
     cur_index = 1
     for char in text:
         current += char
-        result = trie_root.search(trie_root, current)
+        result = trie_root.search(current)
         if result[0] == None:
             # when prev_index 4095 reached, no more new references will be stored.
             # this way the reference can be stored in 12 bits
             if cur_index < 4096:
-                trie_root.insert(trie_root, current, cur_index)
+                trie_root.insert(current, cur_index)
             prev_index = result[1]
             pair = (prev_index, char)
             table.append(pair)
@@ -134,10 +152,10 @@ def lz_bits_to_table(bits: str):
 
 # forgive the repetition this once
 def left_pad_byte(byte: str, target_len: int):
-        missing_bits = (target_len - len(byte)) % target_len
-        padding = "0"*missing_bits
-        byte = padding+byte
-        return byte
+    missing_bits = (target_len - len(byte)) % target_len
+    padding = "0"*missing_bits
+    byte = padding+byte
+    return byte
 
 def lz_decode_table(table: list):
     result = ""

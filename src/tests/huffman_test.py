@@ -31,8 +31,8 @@ class TestHuffman(unittest.TestCase):
         self.freq_table2 = {"A": 3, "B": 2, "C": 1, "D": 4} #more D's
         self.codes = {"A": "0", "B": "10", "C": "110", "D": "111"}
         self.readbin_path = "./src/tests/test_bin/read_this.bin"
-        self.abc_path = "./src/tests/test_bin/aabcbad.bin"
-        self.savebin_path = "./src/tests/test_bin/save_this.bin"
+        self.abc_path = "./src/tests/test_bin/aabcbad_huff.bin"
+        self.savebin_path = "./src/tests/test_bin/save_this_huff.bin"
         self.testbytes = bytearray()
         self.testbytes.append(255)
         self.huffman_string = "0010110100111"
@@ -78,7 +78,6 @@ class TestHuffman(unittest.TestCase):
         self.assertEqual(codes["B"], "10")
         self.assertEqual(codes["C"], "110")
         self.assertEqual(codes["D"], "111")
-
 
         chars = result[1]
         self.assertEqual(chars["0"], "A")

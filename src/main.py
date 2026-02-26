@@ -21,25 +21,25 @@ def compare_file_size(og_path, bin_path):
 
 if __name__ in "__main__":
 
-    og_path = "./src/sampletexts/johndoe.txt"
+    og_path = "./src/sampletexts/aabcbad.txt"
     # og_path = "./src/tests/test_texts/16MB.txt"
     filetext = get_text_from_file(og_path)
-    print("file has been read\n")
+    print("file has been read")
     bin_path = "./binfile.bin"
 
     # LZ78
-    print("saving with lz78\n")
+    print("\nsaving with lz78\n")
     encode_lz(filetext, bin_path)
     compare_file_size(og_path, bin_path)
     lz_output = decode_lz(bin_path)
     #print(lz_output)
     print(f"text matches: {filetext==lz_output}")
 
-    # HUFFMAN
-    print("saving with huffman\n")
-    encode_huffman(filetext, bin_path)
-    compare_file_size(og_path, bin_path)
-    huffman_output = decode_huffman(bin_path)
-    #print(huffman_output)
-    print(f"text matches: {filetext==huffman_output}")
+    # # HUFFMAN
+    # print("\nsaving with huffman\n")
+    # encode_huffman(filetext, bin_path)
+    # compare_file_size(og_path, bin_path)
+    # huffman_output = decode_huffman(bin_path)
+    # #print(huffman_output)
+    # print(f"text matches: {filetext==huffman_output}")
     
