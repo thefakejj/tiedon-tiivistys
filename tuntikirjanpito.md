@@ -26,3 +26,6 @@
 | 18.2  | 3    | Rajattu referencejen määrä LZ.ssa 4096:een ja main puhdistettu. Newline bugi korjattu                                                      |
 | 19.2  | 3    | Päivitin projektinhallintaa, nyt on pytest sun muu. Korjasin myös oikeasti newline bugin. Kirjoitettu testi.                               |
 | 20.2  | 4    | Huffmanille tehty testit kaikille metodeille. Testaavat oikeilla syötteillä toimintaa, ei edge caseja. LZ-testit alkuun. Viikkoraportti 6  |
+| 24.2  | 1    | Vertaisarvio fiilistelyä                                                                                                                   |
+| 25.2  | 4    | Vertaisarviointi ja tekstitiedostojen luomista testaamista varten + vähän omaa ohjelmaa..                                                  |
+| 26.2  | 4    | LZ perus testit tehtyä ja näin                                                                                                             |
