@@ -3,6 +3,7 @@ from lz import decode_lz, encode_lz
 import os
 
 def get_text_from_file(path):
+    # with open(path, "rb") as f:
     with open(path, encoding="ASCII") as f:
     #with open(path) as f: <- if I allow utf-8
         text = f.read()
@@ -11,7 +12,7 @@ def get_text_from_file(path):
         #     while text[last_i-1] == "\n":
         #         last_i -= 1 #reduce by 1 until line breaks are stripped
         #     return text[:last_i]
-        # return text
+        return text
         return text.strip() # removes leading and trailing whitespace. might have to implement the algorithms without this though.
 
 def compare_file_size(og_path, bin_path):
@@ -21,25 +22,29 @@ def compare_file_size(og_path, bin_path):
 
 if __name__ in "__main__":
 
-    og_path = "./src/sampletexts/aabcbad.txt"
-    # og_path = "./src/tests/test_texts/16MB.txt"
+    # og_path = "./src/sampletexts/aabcbad.txt"
+    # og_path = "./src/tests/test_texts/256kB.txt"
+    og_path = "./src/tests/test_texts/16MB.txt"
+
     filetext = get_text_from_file(og_path)
     print("file has been read")
     bin_path = "./binfile.bin"
 
-    # LZ78
-    print("\nsaving with lz78\n")
-    encode_lz(filetext, bin_path)
-    compare_file_size(og_path, bin_path)
-    lz_output = decode_lz(bin_path)
-    #print(lz_output)
-    print(f"text matches: {filetext==lz_output}")
-
-    # # HUFFMAN
-    # print("\nsaving with huffman\n")
-    # encode_huffman(filetext, bin_path)
+    # # LZ78
+    # print("\nsaving with lz78\n")
+    # encode_lz(filetext, bin_path)
     # compare_file_size(og_path, bin_path)
-    # huffman_output = decode_huffman(bin_path)
-    # #print(huffman_output)
-    # print(f"text matches: {filetext==huffman_output}")
+    # lz_output = decode_lz(bin_path)
+    # print("ä"+lz_output+"ä")
+    # print(len(lz_output))
+    # print(f"text matches: {filetext==lz_output}")
+
+    # HUFFMAN
+    print("\nsaving with huffman\n")
+    encode_huffman(filetext, bin_path)
+    compare_file_size(og_path, bin_path)
+    huffman_output = decode_huffman(bin_path)
+    # print("ä"+huffman_output+"ä")
+    # print(len(huffman_output))
+    print(f"text matches: {filetext==huffman_output}")
     

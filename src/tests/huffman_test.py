@@ -2,6 +2,17 @@ import unittest
 from huffman import *
 import os
 
+def get_text_from_file(path):
+    with open(path, encoding="ASCII") as f:
+        return f.read()
+        text = f.read()
+        return text.strip()
+
+def get_file_sizes(og_path, bin_path):
+    og_size = os.path.getsize(og_path)
+    bin_size = os.path.getsize(bin_path)
+    sizes = (og_size, bin_size)
+    return sizes
 
 def create_mock_tree():
     # creates correct kind of tree
@@ -33,6 +44,14 @@ class TestHuffman(unittest.TestCase):
         self.readbin_path = "./src/tests/test_bin/read_this.bin"
         self.abc_path = "./src/tests/test_bin/aabcbad_huff.bin"
         self.savebin_path = "./src/tests/test_bin/save_this_huff.bin"
+        self._1kB = "./src/tests/test_texts/1kB.txt"
+        self._4kB = "./src/tests/test_texts/4kB.txt"
+        self._16kB = "./src/tests/test_texts/16kB.txt"
+        self._64kB = "./src/tests/test_texts/64kB.txt"
+        self._256kB = "./src/tests/test_texts/256kB.txt"
+        self._1MB = "./src/tests/test_texts/1MB.txt"
+        self._4MB = "./src/tests/test_texts/4MB.txt"
+        self._16MB = "./src/tests/test_texts/16MB.txt"
         self.testbytes = bytearray()
         self.testbytes.append(255)
         self.huffman_string = "0010110100111"
@@ -167,3 +186,164 @@ class TestHuffman(unittest.TestCase):
         self.assertEqual(a<b, False)
         self.assertEqual(a>b, True)
         self.assertEqual(c<b, False)
+
+# tests for different file sizes. Checking compression ratio (and correctness?)
+    def test_encode_1kB(self):
+        og_path = self._1kB
+        filetext = get_text_from_file(og_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        encode_huffman(filetext, self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+
+        og_size, bin_size = get_file_sizes(og_path, self.savebin_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        self.assertEqual(output, filetext)
+        self.assertGreater(og_size, bin_size)
+        ratio = (bin_size/og_size) * 100
+        self.assertLess(ratio, 75)
+
+    def test_encode_4kB(self):
+        og_path = self._4kB
+        filetext = get_text_from_file(og_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        encode_huffman(filetext, self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+
+        og_size, bin_size = get_file_sizes(og_path, self.savebin_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        self.assertEqual(output, filetext)
+        self.assertGreater(og_size, bin_size)
+        ratio = (bin_size/og_size) * 100 # in percentage
+        self.assertLess(ratio, 65)
+
+    def test_encode_16kB(self):
+        og_path = self._16kB
+        filetext = get_text_from_file(og_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        encode_huffman(filetext, self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+
+        og_size, bin_size = get_file_sizes(og_path, self.savebin_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        self.assertEqual(output, filetext)
+        self.assertGreater(og_size, bin_size)
+        ratio = (bin_size/og_size) * 100 # in percentage
+        self.assertLess(ratio, 65)
+
+    def test_encode_64kB(self):
+        og_path = self._64kB
+        filetext = get_text_from_file(og_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        encode_huffman(filetext, self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+
+        og_size, bin_size = get_file_sizes(og_path, self.savebin_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        self.assertEqual(output, filetext)
+        self.assertGreater(og_size, bin_size)
+        ratio = (bin_size/og_size) * 100 # in percentage
+        self.assertLess(ratio, 65)
+
+    def test_encode_256kB(self):
+        og_path = self._256kB
+        filetext = get_text_from_file(og_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        encode_huffman(filetext, self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+
+        og_size, bin_size = get_file_sizes(og_path, self.savebin_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        self.assertEqual(output, filetext)
+        self.assertGreater(og_size, bin_size)
+        ratio = (bin_size/og_size) * 100 # in percentage
+        self.assertLess(ratio, 65)
+
+    def test_encode_1MB(self):
+        og_path = self._1MB
+        filetext = get_text_from_file(og_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        encode_huffman(filetext, self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+
+        og_size, bin_size = get_file_sizes(og_path, self.savebin_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        self.assertEqual(output, filetext)
+        self.assertGreater(og_size, bin_size)
+        ratio = (bin_size/og_size) * 100 # in percentage
+        self.assertLess(ratio, 65)
+
+    def test_encode_4MB(self):
+        og_path = self._4MB
+        filetext = get_text_from_file(og_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        encode_huffman(filetext, self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+
+        og_size, bin_size = get_file_sizes(og_path, self.savebin_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        self.assertEqual(output, filetext)
+        self.assertGreater(og_size, bin_size)
+        ratio = (bin_size/og_size) * 100 # in percentage
+        self.assertLess(ratio, 60)
+
+    def test_encode_16MB(self):
+        og_path = self._16MB
+        filetext = get_text_from_file(og_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        encode_huffman(filetext, self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+
+        og_size, bin_size = get_file_sizes(og_path, self.savebin_path)
+
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+
+        self.assertEqual(output, filetext)
+        self.assertGreater(og_size, bin_size)
+        ratio = (bin_size/og_size) * 100 # in percentage
+        self.assertLess(ratio, 60)

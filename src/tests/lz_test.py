@@ -2,6 +2,17 @@ import unittest
 from lz import *
 import os
 
+def get_text_from_file(path):
+    with open(path, encoding="ASCII") as f:
+        text = f.read()
+        return text.strip()
+
+def get_file_sizes(og_path, bin_path):
+    og_size = os.path.getsize(og_path)
+    bin_size = os.path.getsize(bin_path)
+    sizes = (og_size, bin_size)
+    return sizes
+
 def create_mock_trie():
     a = Node(0) # ""
     b = Node(1) # "A"
@@ -24,6 +35,14 @@ class TestLZ(unittest.TestCase):
         self.readbin_path = "./src/tests/test_bin/read_this.bin"
         self.abc_path = "./src/tests/test_bin/aabcbad_lz.bin"
         self.savebin_path = "./src/tests/test_bin/save_this_lz.bin"
+        self._1kB = "./src/tests/test_texts/1kB.txt"
+        self._4kB = "./src/tests/test_texts/4kB.txt"
+        self._16kB = "./src/tests/test_texts/16kB.txt"
+        self._64kB = "./src/tests/test_texts/64kB.txt"
+        self._256kB = "./src/tests/test_texts/256kB.txt"
+        self._1MB = "./src/tests/test_texts/1MB.txt"
+        self._4MB = "./src/tests/test_texts/4MB.txt"
+        self._16MB = "./src/tests/test_texts/16MB.txt"
         self.testbytes = bytearray()
         self.testbytes.append(255)
         self.abc = "AABCBAD"
@@ -71,7 +90,7 @@ class TestLZ(unittest.TestCase):
         file_exists = os.path.exists(self.savebin_path)
 
         if os.path.exists(self.savebin_path):
-            os.remove(self.savebin_path) # removing before assertEqual in case it doesnt pass
+            os.remove(self.savebin_path)
         self.assertEqual(file_exists, True)
 
     def test_read(self):
@@ -108,12 +127,26 @@ class TestLZ(unittest.TestCase):
         if os.path.exists(self.savebin_path):
             os.remove(self.savebin_path)
         encode_lz(self.abc, self.savebin_path)
-
-        # since decode tests pass we trust this method
         output = decode_lz(self.savebin_path)
-
         if os.path.exists(self.savebin_path):
-            os.remove(self.savebin_path) # removing before assertEqual in case it doesnt pass
-        
+            os.remove(self.savebin_path)
         self.assertEqual(output, self.abc)
+
+    # # tests for different file sizes. Checking compression ratio (and correctness?)
+    # def test_encode_1kB(self):
+    #     bin_path = self._1kB
+    #     filetext = get_text_from_file(bin_path)
+
+    #     if os.path.exists(self.savebin_path):
+    #         os.remove(self.savebin_path)
+
+    #     encode_lz(filetext, self.savebin_path)
+    #     output = decode_lz(self.savebin_path)
+
+    #     og_size, bin_size = get_file_sizes(bin_path)
+
+    #     if os.path.exists(self.savebin_path):
+    #         os.remove(self.savebin_path)
+
+    #     self.assertEqual(output, filetext)
 
