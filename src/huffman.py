@@ -13,11 +13,11 @@ class Node:
     def __lt__(self, other):
         return self.freq < other.freq
 
-def encode_huffman(filetext: str, binary_path: str):
-    freq_table = create_freq_table(filetext)
+def encode_huffman(filebytes: bytes, binary_path: str):
+    freq_table = create_freq_table(filebytes)
     tree = create_tree(freq_table)
     huffman_codes = huffman_codes_to_characters_connection(tree)[0]
-    output_string = create_huffman_string(filetext, huffman_codes)
+    output_string = create_huffman_string(filebytes, huffman_codes)
     tree_in_bits = tree_to_binary_string(tree)
     huffman_string_to_binary_file(tree_in_bits, output_string, binary_path)
 
@@ -138,8 +138,8 @@ def tree_to_binary_string(root: Node):
         node = stack.pop()
         if node.left == None and node.right == None:
             bits += "1"
-            char = node.char
-            char_ascii = ord(char)
+            char_ascii = node.char
+            # char_ascii = ord(char)
             char_ascii = format(char_ascii, "b")
             char_ascii = left_pad_byte(char_ascii)
             bits += char_ascii

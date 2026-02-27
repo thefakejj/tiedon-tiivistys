@@ -45,7 +45,7 @@ class TestLZ(unittest.TestCase):
         self._16MB = "./src/tests/test_texts/16MB.txt"
         self.testbytes = bytearray()
         self.testbytes.append(255)
-        self.abc = "AABCBAD"
+        self.abc = "AABCBAD\n\n"
         self.abc_table = [(None, ''), (0, 'A'), (1, 'B'), (0, 'C'), (0, 'B'), (1, 'D')]
         self.abc_binary_string = "0000000000000100000100000000000101000010000000000000010000110000000000000100001000000000000101000100"
 

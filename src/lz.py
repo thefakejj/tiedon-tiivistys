@@ -41,7 +41,7 @@ class Node:
         return output
 
 # one function that calls all necessary functions for encoding and saving
-def encode_lz(filetext: str, binary_path: str):
+def encode_lz(filetext: bytes, binary_path: str):
     lz_table = create_table(filetext)
     lz_binary = lz_to_binary_string(lz_table)
     lz_binary_to_file(lz_binary, binary_path)
@@ -54,27 +54,38 @@ def decode_lz(binary_path: str):
     output = lz_decode_table(new_lz_table)
     return output
 
-def create_table(text: str):
+def create_table(text: bytes):
     # table is a list of (index, character), where index refers to index of correct coding in this table and character is a new character
     # starts with empty node
-    table = [(None, "")]
+    # table = [(None, "")]
+    table = [(None, 0)]# <- null character
+
     trie_root = Node(0)
 
-    current = ""
+    current = bytearray()
     cur_index = 1
+    all_chars = ""
     for char in text:
-        current += char
+        all_chars += chr(char)
+        current.append(char)
         result = trie_root.search(current)
+
+        prev_index = result[1]
         if result[0] == None:
             # when prev_index 4095 reached, no more new references will be stored.
             # this way the reference can be stored in 12 bits
             if cur_index < 4096:
                 trie_root.insert(current, cur_index)
-            prev_index = result[1]
+            cur_index += 1
+            current = bytearray()
             pair = (prev_index, char)
             table.append(pair)
-            cur_index += 1
-            current = ""
+        
+    if result[0] == True:
+        pair = (prev_index, 0)
+        table.append(pair)
+        # if the last character is a known character,
+        # we add it to the end since the i- statement in loop doesn't let it through
     return table
 
 def lz_to_binary_string(table: list):
@@ -88,8 +99,8 @@ def lz_to_binary_string(table: list):
         ref_twelve = format(reference, "b")
         ref_twelve = left_pad_byte(ref_twelve, 12)
 
-        char = pair[1]
-        char_ascii = ord(char)
+        char_ascii = pair[1]
+        # char_ascii = ord(char)
         char_ascii = format(char_ascii, "b")
         char_ascii = left_pad_byte(char_ascii, 8)
         # UNRELATED TO PROJECT https://www.youtube.com/watch?v=rPIt52BwTak 
@@ -109,7 +120,6 @@ def lz_binary_to_file(binary_string: str, filepath: str):
     for i in range(0, len(binary_string), 8):
         byte = binary_string[i:i+8]
         bytes.append(int(byte, 2))
-
     with open(filepath, "wb") as binfile:
         binfile.write(bytes)
 
@@ -144,7 +154,10 @@ def lz_bits_to_table(bits: str):
     
         char = bits[start+12:end]
         char = int(char, 2)
-        char = chr(char)
+        if char == 0:
+            char = ""
+        else:    
+            char = chr(char)
 
         pair = (reference, char)
         table.append(pair)
