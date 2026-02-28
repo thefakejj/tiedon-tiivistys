@@ -64,9 +64,7 @@ def create_table(text: bytes):
 
     current = bytearray()
     cur_index = 1
-    all_chars = ""
     for char in text:
-        all_chars += chr(char)
         current.append(char)
         result = trie_root.search(current)
 

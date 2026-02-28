@@ -32,9 +32,13 @@ def create_mock_trie():
 class TestLZ(unittest.TestCase):
     def setUp(self):
         self.mock_trie = create_mock_trie()
+
+        # there's a lot of these....
         self.readbin_path = "./src/tests/test_bin/read_this.bin"
         self.abc_path = "./src/tests/test_bin/aabcbad_lz.bin"
         self.savebin_path = "./src/tests/test_bin/save_this_lz.bin"
+    
+        # used chatgpt to write these variable names from command tree src/tests/test_texts
         self._1kB = "./src/tests/test_texts/1kB.txt"
         self._4kB = "./src/tests/test_texts/4kB.txt"
         self._16kB = "./src/tests/test_texts/16kB.txt"
@@ -43,9 +47,26 @@ class TestLZ(unittest.TestCase):
         self._1MB = "./src/tests/test_texts/1MB.txt"
         self._4MB = "./src/tests/test_texts/4MB.txt"
         self._16MB = "./src/tests/test_texts/16MB.txt"
+
+        self._a9 = "./src/tests/test_texts/a9.txt"
+        self._a10 = "./src/tests/test_texts/a10.txt"
+        self._a11 = "./src/tests/test_texts/a11.txt"
+        self._a12 = "./src/tests/test_texts/a12.txt"
+
+        self._an6 = "./src/tests/test_texts/an6.txt"
+        self._an7 = "./src/tests/test_texts/an7.txt"
+
+        self._na = "./src/tests/test_texts/na.txt"
+        self._n2a = "./src/tests/test_texts/n2a.txt"
+        self._n2an = "./src/tests/test_texts/n2an.txt"
+        self._n2an2 = "./src/tests/test_texts/n2an2.txt"
+
+        self._test_aabcbad = "./src/tests/test_texts/test_aabcbad.txt"
+
+    
         self.testbytes = bytearray()
         self.testbytes.append(255)
-        self.abc = "AABCBAD\n\n"
+        self.abc = "AABCBAD"
         self.abc_table = [(None, ''), (0, 'A'), (1, 'B'), (0, 'C'), (0, 'B'), (1, 'D')]
         self.abc_binary_string = "0000000000000100000100000000000101000010000000000000010000110000000000000100001000000000000101000100"
 
