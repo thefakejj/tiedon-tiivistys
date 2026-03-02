@@ -29,18 +29,6 @@ if __name__ in "__main__":
     filebytes = get_bytes_from_txt(og_path)
     print("file has been read")
     bin_path = "./binfile.bin"
-    # print(filetext)
-    # with open(bin_path, "wb") as file:
-    #     file.write(filetext)
-
-    # newtext = ""
-    # with open(bin_path, "rb") as newfile:
-    #     bytes = newfile.read()
-    #     print(type(bytes))
-    #     print(bytes[0])
-    #     for byte in bytes:
-    #         print(byte)
-    #         print(type(byte))
     filetext = get_text_from_txt(og_path)
 
     # LZ78
@@ -49,31 +37,10 @@ if __name__ in "__main__":
     compare_file_size(og_path, bin_path)
     lz_output = decode_lz(bin_path)
 
-    # print("\nlz output:")
-    # print("ä"+lz_output+"ä")
-    # print(len(lz_output))
-
-    # print("\nog output")
-    # print("ä"+filetext+"ä")
-    # print(len(filetext))
-
-    # print(f"text matches: {filetext==lz_output}")
-
-
-
-
-
-    # with open("./og.txt", "w") as f: 
-    #     f.write(filetext)
-    # with open("./new.txt", "w") as f: 
-    #     f.write(lz_output)
-    
     # HUFFMAN
     print("\nsaving with huffman\n")
     encode_huffman(filebytes, bin_path)
     compare_file_size(og_path, bin_path)
     huffman_output = decode_huffman(bin_path)
-    # print("ä"+huffman_output+"ä")
-    # print(len(huffman_output))
     print(f"text matches: {filetext==huffman_output}")
     

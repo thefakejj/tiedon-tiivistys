@@ -99,7 +99,6 @@ def lz_to_binary_string(table: list):
 
         char_ascii = pair[1]
         # char_ascii = ord(char)
-        print(char_ascii)
         char_ascii = format(char_ascii, "b")
         char_ascii = left_pad_byte(char_ascii, 8)
         # UNRELATED TO PROJECT https://www.youtube.com/watch?v=rPIt52BwTak 
