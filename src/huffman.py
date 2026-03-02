@@ -15,6 +15,7 @@ class Node:
 
 def encode_huffman(filebytes: bytes, binary_path: str):
     freq_table = create_freq_table(filebytes)
+    print(freq_table)
     tree = create_tree(freq_table)
     huffman_codes = huffman_codes_to_characters_connection(tree)[0]
     output_string = create_huffman_string(filebytes, huffman_codes)
@@ -183,24 +184,24 @@ def left_pad_byte(byte: str):
         byte = padding+byte
         return byte
 
-# helper funciton to check trees
-def bfs(root):
-    visited = set()
-    queue = [root]
-    output = []
-    while len(queue)>0:
-        current = queue[0]
+# # helper funciton to check trees
+# def bfs(root):
+#     visited = set()
+#     queue = [root]
+#     output = []
+#     while len(queue)>0:
+#         current = queue[0]
 
-        #print(current.freq)
-        #if current.char:
-           #print(current.char, "char exists")
-        if current not in visited and not None:
-            for child in [current.left, current.right]:
-                if child != None:
-                    #print(f"{current.freq, current.char} child: {child.freq, child.char}")
-                    queue.append(child)
-            visited.add(current)
-            queue.remove(current)
-        if current.left is None and current.right is None:
-            output.append((current.char, current.freq))
-    return output
+#         #print(current.freq)
+#         #if current.char:
+#            #print(current.char, "char exists")
+#         if current not in visited and not None:
+#             for child in [current.left, current.right]:
+#                 if child != None:
+#                     #print(f"{current.freq, current.char} child: {child.freq, child.char}")
+#                     queue.append(child)
+#             visited.add(current)
+#             queue.remove(current)
+#         if current.left is None and current.right is None:
+#             output.append((current.char, current.freq))
+#     return output

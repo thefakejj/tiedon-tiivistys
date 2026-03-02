@@ -15,18 +15,18 @@ def get_file_sizes(og_path, bin_path):
 
 def create_mock_trie():
     a = Node(0) # ""
-    b = Node(1) # "A"
+    b = Node(1) # 65
     c = Node(2)
     d = Node(3)
     e = Node(4)
     f = Node(5)
 
-    a.children["A"] = b
-    a.children["B"] = e
-    a.children["C"] = d
+    a.children[65] = b
+    a.children[66] = e
+    a.children[67] = d
 
-    b.children["B"] = c
-    b.children["D"] = f
+    b.children[66] = c
+    b.children[68] = f
     return a
 
 class TestLZ(unittest.TestCase):
@@ -67,7 +67,9 @@ class TestLZ(unittest.TestCase):
         self.testbytes = bytearray()
         self.testbytes.append(255)
         self.abc = "AABCBAD"
+        self.abc_bytes = bytearray("AABCBAD", encoding="ASCII")
         self.abc_table = [(None, ''), (0, 'A'), (1, 'B'), (0, 'C'), (0, 'B'), (1, 'D')]
+        self.abc_table_bytes = [(None, 0), (0, 65), (1, 66), (0, 67), (0, 66), (1, 68)]
         self.abc_binary_string = "0000000000000100000100000000000101000010000000000000010000110000000000000100001000000000000101000100"
 
     def test_search_existing_string(self): 
@@ -75,32 +77,32 @@ class TestLZ(unittest.TestCase):
         # which means we can add it to the trie at the index found in result[1]
         # If result[0] == True, string exists and we don't insert it.
         # This is why we get return values like (1, 1)
-        self.assertEqual(self.mock_trie.search(""), (True, 0)) #exists
-        self.assertEqual(self.mock_trie.search("A"), (True, 1))
+        self.assertEqual(self.mock_trie.search(bytearray()), (True, 0)) #exists
+        self.assertEqual(self.mock_trie.search(bytearray("A", encoding="ASCII")), (True, 1))
 
     def test_search_finds_new_string(self): 
-        self.assertEqual(self.mock_trie.search("E"), (None, 0)) # doesn't exist
-        self.assertEqual(self.mock_trie.search("CE"), (None, 3)) # doesn't exist and previous char C is found at index 3
+        self.assertEqual(self.mock_trie.search(bytearray("E", encoding="ASCII")), (None, 0)) # doesn't exist
+        self.assertEqual(self.mock_trie.search(bytearray("CE", encoding="ASCII")), (None, 3)) # doesn't exist and previous char C is found at index 3
 
     def test_insert_new_string(self):
-        self.assertEqual(self.mock_trie.search("E"), (None, 0)) # doesn't exist
-        self.mock_trie.insert("E", 6)
-        self.assertEqual(self.mock_trie.search("E"), (True, 6)) # now exists
-        self.assertEqual(self.mock_trie.search("AE"), (None, 1)) # doesnt exist
+        self.assertEqual(self.mock_trie.search(bytearray("E", encoding="ASCII")), (None, 0)) # doesn't exist
+        self.mock_trie.insert(bytearray("E", encoding="ASCII"), 6)
+        self.assertEqual(self.mock_trie.search(bytearray("E", encoding="ASCII")), (True, 6)) # now exists
+        self.assertEqual(self.mock_trie.search(bytearray("AE", encoding="ASCII")), (None, 1)) # doesnt exist
 
     def test_insert_continuing_string(self):
-        self.assertEqual(self.mock_trie.search("AE"), (None, 1)) # doesn't exist but previous char at index 1
-        self.mock_trie.insert("AE", 6)
-        self.assertEqual(self.mock_trie.search("AE"), (True, 6)) # now exists
-        self.assertEqual(self.mock_trie.search("E"), (None, 0)) # doesnt exist
+        self.assertEqual(self.mock_trie.search(bytearray("AE", encoding="ASCII")), (None, 1)) # doesn't exist but previous char at index 1
+        self.mock_trie.insert(bytearray("AE", encoding="ASCII"), 6)
+        self.assertEqual(self.mock_trie.search(bytearray("AE", encoding="ASCII")), (True, 6)) # now exists
+        self.assertEqual(self.mock_trie.search(bytearray("E", encoding="ASCII")), (None, 0)) # doesnt exist
 
     def test_create_table(self):
-        new = create_table(self.abc)
-        self.assertEqual(new, self.abc_table)
+        new = create_table(self.abc_bytes)
+        self.assertEqual(new, self.abc_table_bytes)
 
     def test_binary_sting_12index_8ascii(self):
         correct = self.abc_binary_string
-        output = lz_to_binary_string(self.abc_table)
+        output = lz_to_binary_string(self.abc_table_bytes)
         self.assertEqual(output, correct)
     
     def test_lz_binary_to_file_abc(self):
@@ -138,7 +140,7 @@ class TestLZ(unittest.TestCase):
     def test_encode_creates_file(self):
         if os.path.exists(self.savebin_path):
             os.remove(self.savebin_path)
-        encode_lz(self.abc, self.savebin_path)
+        encode_lz(self.abc_bytes, self.savebin_path)
         file_exists = os.path.exists(self.savebin_path)
         if os.path.exists(self.savebin_path):
             os.remove(self.savebin_path) # removing before assertEqual in case it doesnt pass
@@ -147,7 +149,7 @@ class TestLZ(unittest.TestCase):
     def test_encode_endtoend(self):
         if os.path.exists(self.savebin_path):
             os.remove(self.savebin_path)
-        encode_lz(self.abc, self.savebin_path)
+        encode_lz(self.abc_bytes, self.savebin_path)
         output = decode_lz(self.savebin_path)
         if os.path.exists(self.savebin_path):
             os.remove(self.savebin_path)

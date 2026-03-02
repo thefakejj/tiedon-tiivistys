@@ -20,9 +20,9 @@ def compare_file_size(og_path, bin_path):
     print(f"Original file size: {og_size} bytes\nBinary file size: {bin_size} bytes\nCompression ratio: {(bin_size/og_size)*100:.2f}%")
 
 if __name__ in "__main__":
-    og_path = "./src/sampletexts/a.txt"
+    # og_path = "./src/sampletexts/a.txt"
     # og_path = "./src/sampletexts/johndoe.txt"
-    # og_path = "./src/sampletexts/aabcbad.txt"
+    og_path = "./src/sampletexts/aabcbad.txt"
     # og_path = "./src/tests/test_texts/4kB.txt"
     # og_path = "./src/tests/test_texts/16MB.txt"
 

@@ -23,22 +23,22 @@ class Node:
             x = x.children[char]
 
     # helper function to traverse tries. doesnt help too much to be honest.
-    def traverse(self):
-        visited = set()
-        queue = [self]
-        output = []
+    # def traverse(self):
+    #     visited = set()
+    #     queue = [self]
+    #     output = []
 
-        while len(queue) > 0:
-            current = queue[0]
-            print(current)
-            print(current.children)
-            if current not in visited and not None:
-                output.append(current.index)
-                for child in current.children:
-                    queue.append(current.children[child])
-                visited.add(current)
-                queue.remove(current)
-        return output
+    #     while len(queue) > 0:
+    #         current = queue[0]
+    #         print(current)
+    #         print(current.children)
+    #         if current not in visited and not None:
+    #             output.append(current.index)
+    #             for child in current.children:
+    #                 queue.append(current.children[child])
+    #             visited.add(current)
+    #             queue.remove(current)
+    #     return output
 
 # one function that calls all necessary functions for encoding and saving
 def encode_lz(filetext: bytes, binary_path: str):
@@ -99,6 +99,7 @@ def lz_to_binary_string(table: list):
 
         char_ascii = pair[1]
         # char_ascii = ord(char)
+        print(char_ascii)
         char_ascii = format(char_ascii, "b")
         char_ascii = left_pad_byte(char_ascii, 8)
         # UNRELATED TO PROJECT https://www.youtube.com/watch?v=rPIt52BwTak 
