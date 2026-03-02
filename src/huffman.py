@@ -15,7 +15,6 @@ class Node:
 
 def encode_huffman(filebytes: bytes, binary_path: str):
     freq_table = create_freq_table(filebytes)
-    print(freq_table)
     tree = create_tree(freq_table)
     huffman_codes = huffman_codes_to_characters_connection(tree)[0]
     output_string = create_huffman_string(filebytes, huffman_codes)
