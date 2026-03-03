@@ -1,5 +1,6 @@
 **/__pycache__/**
 **/binfile.bin
+**/textfile.txt
 **/.pytest_cache/**
 **/__pycache__/**
 .coverage

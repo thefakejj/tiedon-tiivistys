@@ -1,19 +1,38 @@
 class Node:
     def __init__(self, index: int):
+        """Trie class to store known strings.
+
+        Args:
+            index (int): Table index of node/substring
+        """
         self.index = index # current node's table index
         self.children = dict() # children[char] = node. creates trie where routes create substrings (routes to both leaf and non-leaf nodes)
 
     def search(self, key: str):
+        """Searches for substring in trie.
+
+        Args:
+            key (str or bytes): substring
+
+        Returns:
+            tuple: (bool, int) bool: if substring was found. int: table index of latest known substring
+        """
         x = self # start from trie root
         prev_index = 0
         for i in range(len(key)):
             if x.children.get(key[i]) == None:
-                return (None, prev_index) # if key doesnt exist, result[0] = None
+                return (False, prev_index) # if key doesnt exist, result[0] = None
             x = x.children[key[i]]
             prev_index = x.index
         return (True, prev_index) # if key exists, result[0] = True
 
     def insert(self, key: str, index: int):
+        """Inserts new character to create a new substring and gives it latest table index.
+
+        Args:
+            key (str or bytes): substring
+            index (int): table index
+        """
         x = self # start from trie root
         for char in key:
             if x.children.get(char) == None:
@@ -42,12 +61,26 @@ class Node:
 
 # one function that calls all necessary functions for encoding and saving
 def encode_lz(filetext: bytes, binary_path: str):
+    """Encodes text with LZ78 and saves it to binary file.
+
+    Args:
+        filebytes (bytes): Text read as bytes
+        binary_path (str): path of save location
+    """
     lz_table = create_table(filetext)
     lz_binary = lz_to_binary_string(lz_table)
     lz_binary_to_file(lz_binary, binary_path)
 
 # function that calls all necessary functions for decoding, returns string
 def decode_lz(binary_path: str):
+    """Decodes LZ78 table in binary file into  a string
+
+    Args:
+        binary_path (str): path of binary file
+
+    Returns:
+        str: Decoded text
+    """
     lz_bytes = lz_binary_to_bytes(binary_path)
     lz_bits = bytes_to_bits(lz_bytes)
     new_lz_table = lz_bits_to_table(lz_bits)
@@ -55,6 +88,14 @@ def decode_lz(binary_path: str):
     return output
 
 def create_table(text: bytes):
+    """Creates LZ78 table by using trie
+
+    Args:
+        text (bytes): Original text in bytes
+
+    Returns:
+        list: list of tuples (previous_index, character)
+    """
     # table is a list of (index, character), where index refers to index of correct coding in this table and character is a new character
     # starts with empty node
     # table = [(None, "")]
@@ -69,7 +110,7 @@ def create_table(text: bytes):
         result = trie_root.search(current)
 
         prev_index = result[1]
-        if result[0] == None:
+        if result[0] == False:
             # when prev_index 4095 reached, no more new references will be stored.
             # this way the reference can be stored in 12 bits
             if cur_index < 4096:
@@ -83,10 +124,18 @@ def create_table(text: bytes):
         pair = (prev_index, 0)
         table.append(pair)
         # if the last character is a known character,
-        # we add it to the end since the i- statement in loop doesn't let it through
+        # we add it to the end since the if- statement in loop doesn't let it through
     return table
 
 def lz_to_binary_string(table: list):
+    """Creates binary string from LZ78 table.
+
+    Args:
+        table (list): LZ78 table
+
+    Returns:
+        str: String representation of LZ78 table
+    """
     # first is empty
     # we're going to create a string with all the bits
     output = ""
@@ -95,12 +144,12 @@ def lz_to_binary_string(table: list):
         reference = pair[0]
     
         ref_twelve = format(reference, "b")
-        ref_twelve = left_pad_byte(ref_twelve, 12)
+        ref_twelve = left_pad_bits(ref_twelve, 12)
 
         char_ascii = pair[1]
         # char_ascii = ord(char)
         char_ascii = format(char_ascii, "b")
-        char_ascii = left_pad_byte(char_ascii, 8)
+        char_ascii = left_pad_bits(char_ascii, 8)
         # UNRELATED TO PROJECT https://www.youtube.com/watch?v=rPIt52BwTak 
 
         entry = ref_twelve+char_ascii
@@ -108,7 +157,12 @@ def lz_to_binary_string(table: list):
     return output
     
 def lz_binary_to_file(binary_string: str, filepath: str):
-    # could create a file saving function since this is almost same as huffman_string_to_binary_file
+    """Saves LZ78 table's binary string representation to a binary file
+
+    Args:
+        binary_string (str): LZ78 table
+        filepath (str): Binary file path
+    """
     missing_bits = (8 - len(binary_string)) % 8
     padding = "0"*missing_bits
     binary_string += padding
@@ -122,25 +176,49 @@ def lz_binary_to_file(binary_string: str, filepath: str):
         binfile.write(bytes)
 
 def lz_binary_to_bytes(filepath: str):
+    """Returns binary file's content as bytes
+
+    Args:
+        filepath (str): Path of binary file
+
+    Returns:
+        bytes: Contents of binary file
+    """
     with open(filepath, "rb") as binfile:
         bytes = binfile.read()
     return bytes
 
 def bytes_to_bits(bytes: list):
+    """Converts bytes to a string of bits
+
+    Args:
+        bytes (list): Contents of binary file
+
+    Returns:
+        str: bits
+    """
     bits = ""
     detected_padding = bytes[0]
     for i in range(1, len(bytes)):
         byte = bytes[i]
         byte = format(byte, "b")
-        byte = left_pad_byte(byte, 8)
+        byte = left_pad_bits(byte, 8)
         bits += byte
     end_index = len(bits) - detected_padding
-    bits = bits[0:end_index] # string bits should include all binary starting from tree
+    bits = bits[0:end_index]
     return bits
 
 def lz_bits_to_table(bits: str):
+    """Creates a LZ78 table from bits.
+
+    Args:
+        bits (str): _description_
+
+    Returns:
+        list: LZ78 table
+    """
     table = [(None, "")]
-    # we want to first read 12 bits, which gives us a reference
+    # we want to first read 12 bits, which gives us the reference's table index
     # then we want to read 8 bits, which gives the character's acsii code
     # True if currently reading reference
     for i in range(0, len(bits), 20):
@@ -161,14 +239,30 @@ def lz_bits_to_table(bits: str):
         table.append(pair)
     return table
 
-# forgive the repetition this once
-def left_pad_byte(byte: str, target_len: int):
-    missing_bits = (target_len - len(byte)) % target_len
+def left_pad_bits(bits: str, target_len: int):
+    """Pad reference with target_len 12 and pad character with 8.
+
+    Args:
+        bits (str): reference or char
+        target_len (int): 12 for ref and 8 for char
+
+    Returns:
+        str: bits
+    """
+    missing_bits = (target_len - len(bits)) % target_len
     padding = "0"*missing_bits
-    byte = padding+byte
-    return byte
+    bits = padding+bits
+    return bits
 
 def lz_decode_table(table: list):
+    """Decodes original text from a LZ78 table
+
+    Args:
+        table (list): LZ78 table
+
+    Returns:
+        str: Original text
+    """
     result = ""
 
     for pair in table[1:]:

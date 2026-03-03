@@ -45,6 +45,8 @@ Näistä videoista oli paljon hyötyä
 - LZ78: https://youtu.be/LPFtaEy3gMA?si=iU_l7fVOBkX7MU5C
 - Huffman: https://youtu.be/iEm1NRyEe5c?si=kFAwrlcMHp3XEP2L
 
+- https://stackoverflow.com/questions/759707/efficient-way-of-storing-huffman-tree
+
 # HARJOITUSTYÖN YDIN
 
 Harjoitustyön ytimenä on toteuttaa tekstitiedostojen tehokkaita pakkausalgoritmeja, ja pakata teksitiedostoja käyttäen niitä. Tarkoituksena on myös verrata algoritmien pakkaustehoja keskenään.
