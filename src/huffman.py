@@ -105,9 +105,6 @@ def set_huffman_codes(node, codes: dict, current, chars: dict):
         chars (dict): Dictionary {Huffman code: Character}
     """
 
-    if node is None:
-        return
-    
     if node.left is None and node.right is None:
         codes[node.char] = current
         chars[current] = node.char

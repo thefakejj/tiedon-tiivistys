@@ -1,33 +1,13 @@
-This is a bit of a placeholder guide, but here's how to use the program.
+# Pakkausalgoritmien vertailu
 
-Requirements: Poetry
+- [Määrittelydokumentti](docs/määrittelydokumentti.md)
 
-In main.py, you can choose which text file to compress by editing the og_path variable. Note that the program only supports ASCII-data. The compressed data will be saved into binfile.bin located in the project's root directory. The program will print the compression ratio achieved using each algorithm.
+- [Toteutusdokumentti](docs/toteutus.md)
 
-Install dependencies:
+- [Testausdokumentti](docs/testaus.md)
 
-```bash
-poetry install
-```
+- [Asennus- ja käyttöohje](docs/guide.md)
 
-To run the program, use
+- [Tuntikirjanpito](docs/tuntikirjanpito.md)
 
-```bash
-poetry run python3 src/main.py
-```
-
-To run tests, use
-
-```bash
-poetry run coverage run --branch -m pytest src
-```
-
-Create a coverage report either with
-
-```bash
-poetry run coverage report
-```
-
-```bash
-poetry run coverage html
-```
+- Viikkoraportit löytyy docs-hakemistosta

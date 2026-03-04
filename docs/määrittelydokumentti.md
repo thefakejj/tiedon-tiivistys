@@ -12,6 +12,7 @@
 
 - LZ78
 - Huffman-koodaus
+- Trie
 
 ## Minkä ongelman ratkaisen
 

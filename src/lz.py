@@ -119,7 +119,7 @@ def create_table(text: bytes):
             current = bytearray()
             pair = (prev_index, char)
             table.append(pair)
-        
+    
     if result[0] == True:
         pair = (prev_index, 0)
         table.append(pair)
@@ -212,7 +212,7 @@ def lz_bits_to_table(bits: str):
     """Creates a LZ78 table from bits.
 
     Args:
-        bits (str): _description_
+        bits (str): Binary file contents as binary string
 
     Returns:
         list: LZ78 table
@@ -220,7 +220,6 @@ def lz_bits_to_table(bits: str):
     table = [(None, "")]
     # we want to first read 12 bits, which gives us the reference's table index
     # then we want to read 8 bits, which gives the character's acsii code
-    # True if currently reading reference
     for i in range(0, len(bits), 20):
         start = i
         end = i+20

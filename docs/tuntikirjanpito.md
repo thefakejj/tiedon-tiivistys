@@ -31,3 +31,6 @@
 | 26.2  | 4    | LZ perus testit tehtyä ja näin                                                                                                                                                                               |
 | 27.2  | 7    | bugin löytö ja kova bugien korjaus... Vaihdettu merkkien lukemisesta ja tallentamisesta tavuihin/kokonaislukuihin. Nyt luetaan oikeaa tavaraa ja LZ oikeasti toimii. Toivottavasti. + pakkaustehon testausta |
 | 28.2  | 0.5  | viikkoraportti 7                                                                                                                                                                                             |
+|  2.3  | 1    | Demon tekeminen ja esittäminen                                                                                                                                                                               |
+|  3.3  | 4    | Docstringejä, toteutusdokumenttia, "voi ei mun pakkaustehon testaamisdata on huonoa"                                                                                                                         |
+|  4.3  | 4    | Toteutusdokumenttia, testejä lisää                                                                                                                                                                           |
