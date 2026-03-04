@@ -28,7 +28,7 @@ if __name__ in "__main__":
     # og_path = "./src/sampletexts/a.txt"
     # og_path = "./src/sampletexts/johndoe.txt"
     # og_path = "./src/sampletexts/aabcbad.txt"
-    og_path = "./src/tests/test_texts/20kB.txt"
+    og_path = "./src/tests/test_texts/3MB.txt"
     # og_path = "./src/tests/test_texts/4MB.txt"
 
     filebytes = get_bytes_from_txt(og_path)
@@ -39,15 +39,15 @@ if __name__ in "__main__":
     output_path = "./textfile.txt"
     # # LZ78
     print("\nsaving with lz78\n")
-    start_time = time()
+    # start_time = time()
     encode_lz(filebytes, bin_path)
-    print("encode time:", time()-start_time)
+    # print("encode time:", time()-start_time)
 
     compare_file_size(og_path, bin_path)
 
-    start_time = time()
+    # start_time = time()
     lz_output = decode_lz(bin_path)
-    print("decode time:", time()-start_time)
+    # print("decode time:", time()-start_time)
 
     print(f"text matches: {filetext==lz_output}")
     # write_to_txt(output_path, lz_output)
@@ -55,15 +55,15 @@ if __name__ in "__main__":
 
     # HUFFMAN
     print("\nsaving with huffman\n")
-    start_time = time()
+    # start_time = time()
     encode_huffman(filebytes, bin_path)
-    print("encode time:", time()-start_time)
+    # print("encode time:", time()-start_time)
 
     compare_file_size(og_path, bin_path)
 
-    start_time = time()
+    # start_time = time()
     huffman_output = decode_huffman(bin_path)
-    print("decode time:", time()-start_time)
+    # print("decode time:", time()-start_time)
 
     print(f"text matches: {filetext==huffman_output}")
     # write_to_txt(output_path, huffman_output)

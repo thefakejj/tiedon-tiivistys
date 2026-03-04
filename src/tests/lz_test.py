@@ -49,7 +49,6 @@ class TestLZ(unittest.TestCase):
         self._1kB = "./src/tests/test_texts/1kB.txt"
         self._4kB = "./src/tests/test_texts/4kB.txt"
         self._16kB = "./src/tests/test_texts/16kB.txt"
-        self._20kB = "./src/tests/test_texts/20kB.txt"
         self._64kB = "./src/tests/test_texts/64kB.txt"
         self._256kB = "./src/tests/test_texts/256kB.txt"
         self._1MB = "./src/tests/test_texts/1MB.txt"
@@ -183,11 +182,11 @@ class TestLZ(unittest.TestCase):
     def test_encode_endtoend_4096_entries(self):
         if os.path.exists(self.savebin_path):
             os.remove(self.savebin_path)
-        encode_lz(get_bytes_from_txt(self._20kB), self.savebin_path)
+        encode_lz(get_bytes_from_txt(self._16kB), self.savebin_path)
         output = decode_lz(self.savebin_path)
         if os.path.exists(self.savebin_path):
             os.remove(self.savebin_path)
-        self.assertEqual(output, get_text_from_txt(self._20kB))
+        self.assertEqual(output, get_text_from_txt(self._16kB))
     # CAN ADD ALL FUNNY TESTCASES HERE
     
     def test_encode_endtoend_a9(self):

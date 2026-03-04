@@ -33,4 +33,4 @@
 | 28.2  | 0.5  | viikkoraportti 7                                                                                                                                                                                             |
 |  2.3  | 1    | Demon tekeminen ja esittäminen                                                                                                                                                                               |
 |  3.3  | 4    | Docstringejä, toteutusdokumenttia, "voi ei mun pakkaustehon testaamisdata on huonoa"                                                                                                                         |
-|  4.3  | 4    | Toteutusdokumenttia, testejä lisää                                                                                                                                                                           |
+|  4.3  | 5    | Toteutusdokumenttia, testejä, war and peace vähällä whitespacella, pakkaustehon vertailu                                                                                                                     |
