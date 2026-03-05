@@ -119,7 +119,7 @@ def create_table(text: bytes):
             current = bytearray()
             pair = (prev_index, char)
             table.append(pair)
-
+    print(cur_index)
     if result[0] == True:
         pair = (prev_index, 0)
         table.append(pair)

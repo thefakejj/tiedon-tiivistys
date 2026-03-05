@@ -24,6 +24,11 @@ Aikavaativuuksia
 - Insert: O(n), missä n on avaimen pituus
 - Create table: O(nlogn), missä n on tekstin pituus
 
+Tilavaativuuksia
+
+- Trie: O(n), missä n on tekstin pituus
+- LZ78-taulu: O(m), missä m on taulun rivien määrä
+
 #### Dekoodaukseussa toimitaan seuraavasti:
 
 Luetaan tiedostosta binäärimerkkijono tavuina -> Muokataan tavut binäärimerkkijonoksi -> Luodaan taulu binäärimerkkijonosta -> Luodaan alkuperäinen merkkijono taulusta
@@ -51,6 +56,11 @@ Aikavaativuuksia
 - Teksti binääriksi: O(n), missä n on tekstin pituus
 - Puu binääriksi: O(n), missä n on solmujen määrä
 
+Tilavaativuuksia
+
+- Frequency table: O(m), missä m uniikkien merkkien määrä
+- Huffman-puu: O(m), missä m on uniikkien merkkien määrä
+
 #### Dekoodaukseussa toimitaan seuraavasti:
 
 Luetaan tiedosto tavuina -> muokataan tavut biteiksi -> luodaan Huffman-puu biteistä -> luodaan sanakirja merkeille puun avulla -> muodostetaan teksti viimeisistä biteistä sanakirjalla
@@ -62,6 +72,8 @@ Aikavaativuuksia
 - Merkkijonon muodostaminen biteistä: O(n), missä n on bittien määrä
 
 ## Puutteet ja parannukset
+
+Huffman-algoritmissa on bugi, jonka takia se ei pakkaa tekstiä, jossa on vain yhtä merkkiä. Tämä johtuu siitä, että priority queuen pituus on aina maksimissaan 1, joten while-looppiin ei mennä.
 
 Ohjelmasta olisi käytännöllisempi käyttöliittymän kanssa. Minulla on visio komentorivikäyttöliittymästä, johon voi kirjoittaa pakattavaksi laitettavan tiedoston polun, ja kenties pakatun tiedoston polun. Voisin myös tehdä hakemiston, johon tallennetaan pakattavia tiedostoja, joista käyttäjä voi valita pakattavaksi jonkun syöttämällä sitä vastaavan numeron.
 
