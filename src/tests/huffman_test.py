@@ -2,11 +2,17 @@ import unittest
 from huffman import *
 import os
 
-def get_text_from_file(path):
-    with open(path, encoding="ASCII") as f:
+def get_bytes_from_txt(path):
+    with open(path, "rb") as f:
         return f.read()
-        text = f.read()
-        return text.strip()
+
+def get_text_from_txt(path):
+    with open(path, "rb") as f:
+        output = ""
+        bytes = f.read()
+        for byte in bytes:
+            output += chr(byte)
+        return output
 
 def get_file_sizes(og_path, bin_path):
     og_size = os.path.getsize(og_path)
@@ -50,8 +56,6 @@ class TestHuffman(unittest.TestCase):
         self._64kB = "./src/tests/test_texts/64kB.txt"
         self._256kB = "./src/tests/test_texts/256kB.txt"
         self._1MB = "./src/tests/test_texts/1MB.txt"
-        self._4MB = "./src/tests/test_texts/4MB.txt"
-        self._16MB = "./src/tests/test_texts/16MB.txt"
     
         # used chatgpt to write these variable names from command tree src/tests/test_texts
         self._a9 = "./src/tests/test_texts/a9.txt"
