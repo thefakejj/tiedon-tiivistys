@@ -34,3 +34,5 @@
 |  2.3  | 1    | Demon tekeminen ja esittäminen                                                                                                                                                                               |
 |  3.3  | 4    | Docstringejä, toteutusdokumenttia, "voi ei mun pakkaustehon testaamisdata on huonoa"                                                                                                                         |
 |  4.3  | 5    | Toteutusdokumenttia, testejä, war and peace vähällä whitespacella, pakkaustehon vertailu                                                                                                                     |
+|  5.3  | 3    | Dokkareita, bugifixejä, testejä                                                                                                                                                                              |
+|  6.3  | 2    | Dokkareita, bugifixejä, testejä                                                                                                                                                                              |
