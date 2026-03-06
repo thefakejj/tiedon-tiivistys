@@ -10,7 +10,7 @@ Kaikki metodit on yksikkötestattu. Huomiona huffmanin binary_string_to_tree-fun
 Pakkaamisen oikeellisuutta testataan muutamalla eri tyyppisellä syötteellä:
 
 - Hyvin lyhyt yksinkertainen teksti
-- Pidempi teksti (LZ:ssä yli 4096 viitettä)
+- Pidempi teksti (LZ:ssä yli 4096 viitettä) (tarkistetaan pakkausteho)
 - Rivinvaihdoilla aloittaminen ja lopettaminen
 - Vain yhtä merkkiä sisältävät tekstit eri pituuksilla
 

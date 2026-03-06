@@ -200,9 +200,18 @@ class TestLZ(unittest.TestCase):
             os.remove(self.savebin_path)
         encode_lz(get_bytes_from_txt(self._16kB), self.savebin_path)
         output = decode_lz(self.savebin_path)
+
+        og_size, bin_size = get_file_sizes(self._16kB, self.savebin_path)
+    
         if os.path.exists(self.savebin_path):
             os.remove(self.savebin_path)
         self.assertEqual(output, get_text_from_txt(self._16kB))
+
+        self.assertGreater(og_size, bin_size)
+        ratio = (bin_size/og_size) * 100 # in percentage
+        self.assertLess(ratio, 70) #less than 70 is reasonable
+
+
     # CAN ADD ALL FUNNY TESTCASES HERE
     
     def test_encode_endtoend_a9(self):
