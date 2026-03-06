@@ -1,11 +1,18 @@
 # Testaus
 
-Testikattavuus (4.3.2026)
-![Coverage report. src/huffman.py 99% test coverage. src/lz.py 99% test coverage. 99% Total test coverage.](test_coverage.png)
+Testikattavuus (6.3.2026)
+![Coverage report. src/huffman.py 99% test coverage. src/lz.py 98% test coverage. 99% Total test coverage.](test_coverage.png)
 
 ## Ysikkötestit
 
-Kaikki metodit on yksikkötestattu. Huomiona huffmanin binary_string_to_tree-funktiosta: Tässä käytän elif-lauseketta selkeyden takia (tapaukset nollalle ja ykköselle selkeästi erikseen)
+Kaikki metodit on yksikkötestattu. Huomiona huffmanin binary_string_to_tree-funktiosta: Tässä käytän elif-lauseketta selkeyden takia (tapaukset nollalle ja ykköselle selkeästi erikseen). LZ:ssä varmistetaan, että ohjelma pysähtyy erroriin väärillä tyypeillä.
+
+Pakkaamisen oikeellisuutta testataan muutamalla eri tyyppisellä syötteellä:
+
+- Hyvin lyhyt yksinkertainen teksti
+- Pidempi teksti (LZ:ssä yli 4096 viitettä)
+- Rivinvaihdoilla aloittaminen ja lopettaminen
+- Vain yhtä merkkiä sisältävät tekstit eri pituuksilla
 
 ## Pakkaustehon vertailu
 

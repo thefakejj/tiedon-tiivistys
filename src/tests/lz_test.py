@@ -97,8 +97,16 @@ class TestLZ(unittest.TestCase):
             self.mock_trie.search(1)
 
     def test_search_raisees_str(self):
-        with pytest.raises(TypeError) as context:
+        with self.assertRaises(TypeError) as context:
             self.mock_trie.search("E")
+    
+    def test_insert_raises_int(self):
+        with self.assertRaises(TypeError) as context:  
+            self.mock_trie.insert(1, 1)
+
+    def test_insert_raisees_str(self):
+        with self.assertRaises(TypeError) as context:  
+            self.mock_trie.insert("E", 1)
 
     def test_search_finds_new_string(self): 
         self.assertEqual(self.mock_trie.search(bytearray("E", encoding="ASCII")), (False, 0)) # doesn't exist
@@ -114,14 +122,6 @@ class TestLZ(unittest.TestCase):
         self.mock_trie.insert(bytearray("AE", encoding="ASCII"), 6)
         self.assertEqual(self.mock_trie.search(bytearray("AE", encoding="ASCII")), (True, 6)) # now exists
         self.assertEqual(self.mock_trie.search(bytearray("E", encoding="ASCII")), (False, 0)) # doesnt exist
-
-    def test_insert_raises_int(self):
-        with pytest.raises(TypeError):  
-            self.mock_trie.insert(1)
-
-    def test_insert_raisees_str(self):
-        with pytest.raises(TypeError):  
-            self.mock_trie.insert("E")
 
     def test_create_table(self):
         new = create_table(self.abc_bytes)
