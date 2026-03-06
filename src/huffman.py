@@ -16,6 +16,7 @@ class Node:
         self.char = char
         self.left = None
         self.right = None
+        self.only = False # This is the only node in the tree
 
     # less-than operaaito, jotta heap osaa järjestellä nodet
     # less-than operation, returns the node with smaller freq. Used for heap/priority queue.
@@ -83,6 +84,10 @@ def create_tree(freq_table: dict):
         node = Node(freq, char)
         heapq.heappush(prio_queue, node)
 
+    if len(freq_table) == 1:
+        node.only = True
+        return node
+
     while len(prio_queue) >= 2:
         left = heapq.heappop(prio_queue)
         right = heapq.heappop(prio_queue)
@@ -124,6 +129,10 @@ def huffman_codes_to_characters_connection(root):
     """
     codes = {}
     chars = {}
+    if root.only == True:
+        codes[root.char] = "0"
+        chars["0"] = root.char
+        return codes, chars
     set_huffman_codes(root, codes, "", chars)
     return codes, chars
 
@@ -252,9 +261,22 @@ def binary_string_to_tree(bits: str):
     Returns:
         dict: Tree: root. Length: length of tree in the string.
     """
+
+    if bits[0] == "1": # if there is 1 node, first bit is 1
+        char = bits[1:9]
+        char = int(char, 2)
+        char = chr(char)
+        root = Node(1, char)
+        root.only = True # idk maybe I need this
+        i = 9
+
+        data = {"tree": root, "length": i}
+        return data
+
     i = 0
     root = Node(1) # 1 is placeholder argument for freq. It doesn't matter for decoding
     stack = [root] 
+
     while True:
         if len(stack) < 1:
             break

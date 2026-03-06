@@ -8,15 +8,17 @@ class Node:
         self.index = index # current node's table index
         self.children = dict() # children[char] = node. creates trie where routes create substrings (routes to both leaf and non-leaf nodes)
 
-    def search(self, key: str):
+    def search(self, key: bytearray):
         """Searches for substring in trie.
 
         Args:
-            key (str or bytes): substring
+            key (bytearray): substring
 
         Returns:
             tuple: (bool, int) bool: if substring was found. int: table index of latest known substring
         """
+        if type(key) != bytearray:
+            raise TypeError("Argument key must be of a bytearray.")
         x = self # start from trie root
         prev_index = 0
         for i in range(len(key)):
@@ -26,13 +28,15 @@ class Node:
             prev_index = x.index
         return (True, prev_index) # if key exists, result[0] = True
 
-    def insert(self, key: str, index: int):
+    def insert(self, key: bytearray, index: int):
         """Inserts new character to create a new substring and gives it latest table index.
 
         Args:
             key (str or bytes): substring
             index (int): table index
         """
+        if type(key) != bytearray:
+            raise TypeError("Argument key must be of a bytearray.")
         x = self # start from trie root
         for char in key:
             if x.children.get(char) == None:

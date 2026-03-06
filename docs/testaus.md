@@ -1,7 +1,13 @@
+# Testaus
+
 Testikattavuus (4.3.2026)
 ![Coverage report. src/huffman.py 99% test coverage. src/lz.py 99% test coverage. 99% Total test coverage.](test_coverage.png)
 
-Pakkaustehon vertailu
+## Ysikkötestit
+
+Kaikki metodit on yksikkötestattu. Huomiona huffmanin binary_string_to_tree-funktiosta: Tässä käytän elif-lauseketta selkeyden takia (tapaukset nollalle ja ykköselle selkeästi erikseen)
+
+## Pakkaustehon vertailu
 
 Testidatana War and Peace vähemmällä whitespacella, suurin versio noin 3MB. Tässä versiossa edelleen sisennys tehdään välilyönnillä, mikä suosii huffman-algoritmia.
 
@@ -55,7 +61,8 @@ Testaus on tehty tämän rivin kirjoituksen aikaisen commitin main-tiedostossa o
 
 - huffman: 56.02%
 
-
 Tämän vertailun tuloksena on se, että Huffman-koodaus on tälle syötteelle tehokkaampi pakkaustapa kuin LZ78.
 
 Molemmilla algoritmeilla pakkausteho paranee mitä suurempaan tiedostoon siirrytään. 16kB tiedostossa saadaan LZ78-algoritmilla hieman yli 4096 riviä tauluun, minkä jälkeen uusia yhdistelmiä ei enää etsitä. Luultavasti tämän takia pakkausteho ei kasva huomattavasti 16kB suuremmilla tiedostoilla, kun käytetään LZ78-algoritmia.
+
+Huffmanista myös huomaa, että se on melko tehokas jo pienemmilläkin tiedostoilla. Kuten aiemmin mainittiin, testidata suosii jonkin verran Huffman-koodausta, sillä kirjassa on tehty sisennyksiä usealla välilyönnillä.

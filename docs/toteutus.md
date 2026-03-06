@@ -73,8 +73,6 @@ Aikavaativuuksia
 
 ## Puutteet ja parannukset
 
-Huffman-algoritmissa on bugi, jonka takia se ei pakkaa tekstiä, jossa on vain yhtä merkkiä. Tämä johtuu siitä, että priority queuen pituus on aina maksimissaan 1, joten while-looppiin ei mennä.
-
 Ohjelmasta olisi käytännöllisempi käyttöliittymän kanssa. Minulla on visio komentorivikäyttöliittymästä, johon voi kirjoittaa pakattavaksi laitettavan tiedoston polun, ja kenties pakatun tiedoston polun. Voisin myös tehdä hakemiston, johon tallennetaan pakattavia tiedostoja, joista käyttäjä voi valita pakattavaksi jonkun syöttämällä sitä vastaavan numeron.
 
 ## Laajojoen kielimallien käyttö

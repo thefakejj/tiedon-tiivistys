@@ -216,3 +216,57 @@ class TestHuffman(unittest.TestCase):
         if os.path.exists(self.savebin_path):
             os.remove(self.savebin_path)
         self.assertEqual(output, get_text_from_txt(self._16kB))
+
+    def test_encode_endtoend_a9(self):
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+        encode_huffman(get_bytes_from_txt(self._a9), self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+        self.assertEqual(output, get_text_from_txt(self._a9))
+
+    def test_encode_endtoend_a10(self):
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+        encode_huffman(get_bytes_from_txt(self._a10), self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+        self.assertEqual(output, get_text_from_txt(self._a10))
+
+    def test_encode_endtoend_a12(self):
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+        encode_huffman(get_bytes_from_txt(self._a12), self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+        self.assertEqual(output, get_text_from_txt(self._a12))
+
+    def test_encode_endtoend_n2an2(self):
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+        encode_huffman(get_bytes_from_txt(self._n2an2), self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+        self.assertEqual(output, get_text_from_txt(self._n2an2))
+
+    def test_encode_endtoend_n2an(self):
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+        encode_huffman(get_bytes_from_txt(self._n2an), self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+        self.assertEqual(output, get_text_from_txt(self._n2an))
+
+    def test_encode_endtoend_an7(self):
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+        encode_huffman(get_bytes_from_txt(self._an7), self.savebin_path)
+        output = decode_huffman(self.savebin_path)
+        if os.path.exists(self.savebin_path):
+            os.remove(self.savebin_path)
+        self.assertEqual(output, get_text_from_txt(self._an7))

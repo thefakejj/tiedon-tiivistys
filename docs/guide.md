@@ -6,7 +6,7 @@ Install dependencies:
 poetry install
 ```
 
-In main.py, you can choose which text file to compress by editing the og_path variable. Note that the program only compresses ASCII-data correctly. The compressed data will be saved into binfile.bin located in the project's root directory. The program will print the compression ratio achieved using each algorithm.
+In main.py, you can choose which text file to compress by editing the og_path variable. Note that the program only compresses ASCII-data correctly. The compressed data will be saved into binfile.bin located in the project's root directory. The program will print the compression ratio achieved using each algorithm as well as check that the decoded text matches the original.
 
 To run the program, use
 
