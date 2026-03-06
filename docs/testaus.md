@@ -68,8 +68,8 @@ Testaus on tehty tämän rivin kirjoituksen aikaisen commitin main-tiedostossa o
 
 - huffman: 56.02%
 
-Tämän vertailun tuloksena on se, että Huffman-koodaus on tälle syötteelle tehokkaampi pakkaustapa kuin LZ78.
+Molemmilla algoritmeilla pakkausteho paranee mitä suurempaan tiedostoon siirrytään. Tämän vertailun tuloksena on se, että Huffman-koodaus on tälle syötteelle tehokkaampi pakkaustapa kuin LZ78.
 
-Molemmilla algoritmeilla pakkausteho paranee mitä suurempaan tiedostoon siirrytään. 16kB tiedostossa saadaan LZ78-algoritmilla hieman yli 4096 riviä tauluun, minkä jälkeen uusia yhdistelmiä ei enää etsitä. Luultavasti tämän takia pakkausteho ei kasva huomattavasti 16kB suuremmilla tiedostoilla, kun käytetään LZ78-algoritmia.
+16kB tiedostossa saadaan LZ78-algoritmilla hieman yli 4096 riviä tauluun, minkä jälkeen uusia yhdistelmiä ei enää etsitä. Luultavasti tämän takia pakkausteho ei kasva huomattavasti 16kB suuremmilla tiedostoilla, kun käytetään LZ78-algoritmia.
 
 Huffmanista myös huomaa, että se on melko tehokas jo pienemmilläkin tiedostoilla. Kuten aiemmin mainittiin, testidata suosii jonkin verran Huffman-koodausta, sillä kirjassa on tehty sisennyksiä usealla välilyönnillä.
