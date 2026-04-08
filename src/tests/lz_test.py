@@ -55,6 +55,7 @@ class TestLZ(unittest.TestCase):
         self._1MB = "./src/tests/test_texts/1MB.txt"
 
         # Some of these broke LZ before I fixed it.
+        self._a5 = "./src/tests/test_texts/a5.txt"
         self._a9 = "./src/tests/test_texts/a9.txt"
         self._a10 = "./src/tests/test_texts/a10.txt"
         self._a11 = "./src/tests/test_texts/a11.txt"
