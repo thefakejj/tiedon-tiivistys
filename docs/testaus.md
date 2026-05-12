@@ -20,6 +20,14 @@ Testidatana War and Peace vähemmällä whitespacella, suurin versio noin 3MB. T
 
 Testaus on tehty tämän rivin kirjoituksen aikaisen commitin main-tiedostossa olevilla käskyillä. Molemmilla algoritmeilla on tarkistettu pakkaamisen oikeellisuus vertailun yhteydessä.
 
+## Huomio testausdataan liittyen
+
+Nämä testit on tehty ilman whitespacea. Esimerkiksi War and Peace whitespacen kanssa käyttäytyy seuraavasti:
+
+Original file size: 4434670 bytes
+Binary file size: 2097946 bytes
+Compression ratio: 47.31%
+
 ### 1kB
 
 - lz78 100.67%
